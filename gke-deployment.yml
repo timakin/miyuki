@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: deployment-miyuki
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: miyuki
+    spec:
+      containers:
+      - name: miyuki
+        image: gcr.io/$PROJECT_ID/miyuki:latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
