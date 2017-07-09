@@ -41,6 +41,7 @@ func (h WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		phrase := "おめでとうございます、お兄様！お兄様はまたしても不可能を可能にされました！"
 		params := slack.NewPostMessageParameters()
 		params.Username = "miyuki"
+		params.IconURL = "https://github.com/timakin/miyuki/raw/master/miyuki_face.png"
 		if _, _, err := h.SlackClient.PostMessage(h.ChannelID, phrase, params); err != nil {
 			log.Printf("[ERROR] Failed to post message: %s", err)
 			return
