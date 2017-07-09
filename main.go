@@ -13,7 +13,7 @@ import (
 // https://api.slack.com/internal-integrations
 type envConfig struct {
 	// Port is server port to be listened.
-	Port string `envconfig:"PORT" default:"8080"`
+	Port string `envconfig:"PORT" default:"3000"`
 
 	// BotToken is bot user token to access to slack API.
 	BotToken string `envconfig:"BOT_TOKEN" required:"true"`
@@ -23,6 +23,10 @@ type envConfig struct {
 
 	// BotID is bot user ID.
 	BotID string `envconfig:"BOT_ID" required:"true"`
+
+	// ChannelID is slack channel ID where bot is working.
+	// Bot responses to the mention in this channel.
+	ChannelID string `envconfig:"CHANNEL_ID" required:"true"`
 }
 
 func main() {
@@ -40,8 +44,9 @@ func _main(args []string) int {
 	log.Printf("[INFO] Start slack event listening")
 	client := slack.New(env.BotToken)
 	slackListener := &SlackListener{
-		client: client,
-		botID:  env.BotID,
+		client:    client,
+		botID:     env.BotID,
+		channelID: env.ChannelID,
 	}
 	go slackListener.ListenAndResponse()
 
