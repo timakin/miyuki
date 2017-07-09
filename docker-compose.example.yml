@@ -6,6 +6,6 @@ services:
     ports:
       - 8080:8080
     environment:
-      - HUBOT_SLACK_TOKEN=<slack token | ex) xoxb-....>
-      - HUBOT_SLACK_TEAM=<slack team | ex) hogehoge.slack.team>
-      - HUBOT_SLACK_BOTNAME=miyuki
+      - BOT_ID=miyuki
+      - BOT_TOKEN=$MIYUKI_HUBOT_TOKEN
+      - CHANNEL_ID=$MIYUKI_CHANNEL_ID

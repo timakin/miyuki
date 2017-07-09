@@ -1,6 +1,14 @@
 # miyuki
 Miyuki bot on GKE
 
+# local
+
+```
+$ go build -o app
+$ docker-compose build
+$ docker-compose run
+```
+
 # Setup
 1. download gcloud command
 2. add a hubot configuration to you slack
@@ -27,9 +35,9 @@ $ gcloud container builds submit --config cloudbuild.yaml
 # Deployment
 $ kubectl run pod-miyuki \
       --image=gcr.io/$PROJECT_ID/miyuki:latest \
-      --env="HUBOT_SLACK_TOKEN=$MIYUKI_HUBOT_SLACK_TOKEN" \
-      --env="HUBOT_SLACK_TEAM=$MIYUKI_HUBOT_SLACK_TEAM" \
-      --env="HUBOT_SLACK_BOTNAME=miyuki" \
+      --env="BOT_ID=miyuki" \
+      --env="BOT_TOKEN=$MIYUKI_HUBOT_TOKEN" \
+      --env="CHANNEL_ID=$MIYUKI_CHANNEL_ID" \
       --port=8080 \
       --restart='Always'
 $ kubectl get deployments
