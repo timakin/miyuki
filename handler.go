@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/google/go-github/github"
 	"github.com/nlopes/slack"
@@ -36,12 +37,17 @@ func (h WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if *event.Action == "closed" && *event.PullRequest.Merged {
+	if *event.Action == "closed" && *event.PullRequest.Merged && *event.PullRequest.Base.Ref == "master" {
 		phrase := "おめでとうございます、お兄様！お兄様はまたしても不可能を可能にされました！"
 		params := slack.NewPostMessageParameters()
+		params.Username = "miyuki"
 		if _, _, err := h.SlackClient.PostMessage(h.ChannelID, phrase, params); err != nil {
 			log.Printf("[ERROR] Failed to post message: %s", err)
 			return
 		}
+	} else {
+		log.Printf("[ERROR] Failed to parse a right payload: (action: %s, merged: %s, Ref: %s)", *event.Action, strconv.FormatBool(*event.PullRequest.Merged), *event.PullRequest.Base.Ref)
+		w.WriteHeader(http.StatusBadRequest)
+		return
 	}
 }
