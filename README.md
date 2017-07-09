@@ -44,6 +44,6 @@ $ kubectl get deployments
 $ kubectl get pods
 $ kubectl exec -it $MIYUKI_POD_NAME /bin/bash
 $ kubectl get service
-$ kubectl expose deployment $MIYUKI_POD_NAME --type="LoadBalancer"
+$ kubectl expose deployment pod-miyuki --type="LoadBalancer"
 $ kubectl get service
 ```
