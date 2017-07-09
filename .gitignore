@@ -2,3 +2,4 @@ vendor/
 app/
 app
 docker-compose.yml
+.envrc

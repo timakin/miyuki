@@ -18,9 +18,6 @@ type envConfig struct {
 	// BotToken is bot user token to access to slack API.
 	BotToken string `envconfig:"BOT_TOKEN" required:"true"`
 
-	// VerificationToken is used to validate interactive messages from slack.
-	VerificationToken string `envconfig:"VERIFICATION_TOKEN" required:"true"`
-
 	// BotID is bot user ID.
 	BotID string `envconfig:"BOT_ID" required:"true"`
 
