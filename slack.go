@@ -48,56 +48,8 @@ func (s *SlackListener) handleMessageEvent(ev *slack.MessageEvent) error {
 
 	// Parse message
 	m := strings.Split(strings.TrimSpace(ev.Msg.Text), " ")[1:]
-	if len(m) == 0 || m[0] != "hey" {
+	if len(m) == 0 {
 		return fmt.Errorf("invalid message")
-	}
-
-	// value is passed to message handler when request is approved.
-	attachment := slack.Attachment{
-		Text:       "Which beer do you want? :beer:",
-		Color:      "#f9a41b",
-		CallbackID: "beer",
-		Actions: []slack.AttachmentAction{
-			{
-				Name: actionSelect,
-				Type: "select",
-				Options: []slack.AttachmentActionOption{
-					{
-						Text:  "Asahi Super Dry",
-						Value: "Asahi Super Dry",
-					},
-					{
-						Text:  "Kirin Lager Beer",
-						Value: "Kirin Lager Beer",
-					},
-					{
-						Text:  "Sapporo Black Label",
-						Value: "Sapporo Black Label",
-					},
-					{
-						Text:  "Suntory Malts",
-						Value: "Suntory Malts",
-					},
-					{
-						Text:  "Yona Yona Ale",
-						Value: "Yona Yona Ale",
-					},
-				},
-			},
-
-			{
-				Name:  actionCancel,
-				Text:  "Cancel",
-				Type:  "button",
-				Style: "danger",
-			},
-		},
-	}
-
-	params := slack.PostMessageParameters{
-		Attachments: []slack.Attachment{
-			attachment,
-		},
 	}
 
 	if _, _, err := s.client.PostMessage(ev.Channel, "", params); err != nil {
