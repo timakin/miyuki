@@ -52,8 +52,9 @@ func _main(args []string) int {
 
 	// Register handler to receive interactive message
 	// responses from slack (kicked by user action)
-	http.Handle("/interaction", interactionHandler{
-		verificationToken: env.VerificationToken,
+	http.Handle("/notify-pr-event", webhookHandler{
+		SlackClient: client,
+		ChannelID:   env.ChannelID,
 	})
 
 	log.Printf("[INFO] Server listening on :%s", env.Port)
