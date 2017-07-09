@@ -47,9 +47,8 @@ func _main(args []string) int {
 	}
 	go slackListener.ListenAndResponse()
 
-	// Register handler to receive interactive message
-	// responses from slack (kicked by user action)
-	http.Handle("/notify-pr-event", webhookHandler{
+	// Register handler to receive a webhook for pull-req events
+	http.Handle("/notify-pr-event", WebhookHandler{
 		SlackClient: client,
 		ChannelID:   env.ChannelID,
 	})

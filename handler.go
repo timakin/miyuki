@@ -10,12 +10,12 @@ import (
 	"github.com/nlopes/slack"
 )
 
-type webhookHandler struct {
+type WebhookHandler struct {
 	SlackClient *slack.Client
 	ChannelID   string
 }
 
-func (h webhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		log.Printf("[ERROR] Invalid method: %s", r.Method)
 		w.WriteHeader(http.StatusMethodNotAllowed)
