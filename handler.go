@@ -41,6 +41,11 @@ func (h WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if event.Action == nil || event.PullRequest == nil {
+		ren.JSON(w, http.StatusInternalServerError, map[string]string{"message": fmt.Sprintf("[ERROR] Unmarshalized entity was nil")})
+		return
+	}
+
 	if *event.Action == "closed" && *event.PullRequest.Merged && *event.PullRequest.Base.Ref == "master" {
 		phrase := "おめでとうございます、お兄様！お兄様はまたしても不可能を可能にされました！"
 		params := slack.NewPostMessageParameters()
