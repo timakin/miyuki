@@ -21,6 +21,11 @@ type WebhookHandler struct {
 }
 
 func (h WebhookHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.Header.Get("X-Github-Event") == "ping" {
+		ren.JSON(w, http.StatusOK, "")
+		return
+	}
+
 	if r.Method != http.MethodPost {
 		log.Printf("[ERROR] Invalid method: %s", r.Method)
 		ren.JSON(w, http.StatusMethodNotAllowed, map[string]string{"message": fmt.Sprintf("[ERROR] Invalid method: %s", r.Method)})
