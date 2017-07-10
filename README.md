@@ -30,7 +30,7 @@ $ gcloud container clusters get-credentials miyuki-cluster
 $ gcloud container clusters describe miyuki-cluster
 
 # CloudBuild
-$ gcloud container builds submit --config cloudbuild.yaml
+$ gcloud container builds submit --config cloudbuild.yaml .
 
 # Deployment
 $ kubectl run pod-miyuki \
