@@ -33,6 +33,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/unrolled/render"
+  packages = ["."]
+  revision = "1442182abc1e7397c8c0c862829bd00e9b670a96"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/net"
   packages = ["context","websocket"]
   revision = "054b33e6527139ad5b1ec2f6232c3b175bd9a30c"
@@ -46,6 +52,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b1a370ab151ecb65a7f59ef9b11f74cec48a6c2c619bc12ba028d92d6efbaaf0"
+  inputs-digest = "21447612474ce341df9b57e8039c151b441fdda8d567766fa9f37c5acf889537"
   solver-name = "gps-cdcl"
   solver-version = 1
