@@ -5,8 +5,7 @@ Miyuki bot on GKE
 
 ```
 $ go build -o app
-$ docker-compose build
-$ docker-compose run
+$ ./app
 ```
 
 # Setup
